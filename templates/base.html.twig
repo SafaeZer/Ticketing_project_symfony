@@ -45,31 +45,31 @@
 												<li class="nav-item">
 													<a class="nav-link text-white" href="#">
 														<span data-feather="file"></span>
-														Orders
+														My Tickets
 													</a>
 												</li>
 												<li class="nav-item">
 													<a class="nav-link text-white" href="#">
 														<span data-feather="shopping-cart"></span>
-														Products
+														Comments
 													</a>
 												</li>
 												<li class="nav-item">
 													<a class="nav-link text-white" href="#">
 														<span data-feather="users"></span>
-														Customers
+														Recently updated
 													</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" href="#">
+													<a class="nav-link text-white" href="#">
 														<span data-feather="bar-chart-2"></span>
-														Reports
+														Solved
 													</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" href="#">
+													<a class="nav-link text-white" href="#">
 														<span data-feather="layers"></span>
-														Integrations
+														closed
 													</a>
 												</li>
 											</ul>
@@ -122,57 +122,27 @@
 												</button>
 											</div>
 										</div>
+										<a class="btn btn-success" href="{{path('app_ticket')}}">+ New ticket</a>
+									{% else %}
+										<h3 class="float-md-start mb-0">Ticketing</h3>
+									{% endif %}
+									<nav class="nav nav-masthead justify-content-center float-md-end">
+										<div class="text-end">
+											{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+												{% else %}
+													<a class="btn btn-outline-primary me-2" href="{{ path('app_login')}}">Sign-in</a>
+													<a class="btn btn-warning" href="{{ path('app_register')}}">Sign-up</a>
+											{% endif %}
 
-
-										<div class="container mt-5">
-											<form>
-												<div class="form-group">
-													<label for="exampleFormControlSelect1">Type</label>
-													<select class="form-control" id="exampleFormControlSelect1">
-														<option></option>
-														<option>demande</option>
-														<option>incident</option>
-													</select>
-													<label for="exampleFormControlSelect2">Category</label>
-													<select class="form-control" id="exampleFormControlSelect2">
-														<option>Licence d’un logiciel</option>
-														<option>un matériel</option>
-														<option>un accès</option>
-													</select>
-													<label for="exampleFormControlSelect3">Title</label>
-													<input type="text" class="form-control" id="exampleFormControlInput1">
-													<div class="form-group">
-														<label for="exampleFormControlTextarea1">Description</label>
-														<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-													</div>
-													<div class="form-group">
-														<label for="exampleFormControlFile1">Piéce joint(pdf,word,jpg..)</label>
-														<input type="file" class="form-control-file" id="exampleFormControlFile1">
-													</div>
-													<button type="submit" class="btn btn-primary">Submit</button>
-												</form>
-											</div>
-										{% else %}
-											<h3 class="float-md-start mb-0">Ticketing</h3>
-										{% endif %}
-										<nav class="nav nav-masthead justify-content-center float-md-end">
-											<div class="text-end">
-												{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-													{% else %}
-														<a class="btn btn-outline-primary me-2" href="{{ path('app_login')}}">Sign-in</a>
-														<a class="btn btn-warning" href="{{ path('app_register')}}">Sign-up</a>
-												{% endif %}
-
-											</div>
-										</nav>
-									</div>
-								</body>
+										</div>
+									</nav>
+								</div>
 							</body>
 						</body>
-					</header>
-				</div>
-				{% block body %}{% endblock %}
-			</body>
-		</html>
+					</body>
+				</header>
+			</div>
+			{% block body %}{% endblock %}
+		</body>
 	</body>
-</html>
+</html></body></html>
