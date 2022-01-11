@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TicketRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=TicketRepository::class)
@@ -34,11 +35,13 @@ class Ticket
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $created_date;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
      */
     private $updated_date;
 
@@ -111,24 +114,14 @@ class Ticket
         return $this->created_date;
     }
 
-    public function setCreatedDate(\DateTimeInterface $created_date): self
-    {
-        $this->created_date = $created_date;
 
-        return $this;
-    }
 
     public function getUpdatedDate(): ?\DateTimeInterface
     {
         return $this->updated_date;
     }
 
-    public function setUpdatedDate(\DateTimeInterface $updated_date): self
-    {
-        $this->updated_date = $updated_date;
 
-        return $this;
-    }
 
     public function getPriority(): ?string
     {
