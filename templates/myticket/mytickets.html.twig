@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MyticketController!
+{% endblock %}
+
+{% block body %}
+	<div class="row my-5">
+		<div class="col-md-8 mx-auto">
+			<div class="card">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">id</th>
+							<th scope="col">Type</th>
+							<th scope="col">Category</th>
+							<th scope="col">Title</th>
+							<th scope="col">Description</th>
+							<th scope="col">Files</th>
+							<th scope="col">Created_date</th>
+							<th scope="col">updated_date</th>
+							<th scope="col">Priority</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for ticket in tickets %}
+							<tr>
+								<td scope="row">{{ticket.id}}</td>
+								<td>{{ticket.ticketType.name}}</td>
+								<td>{{ticket.category.name}}</td>
+								<td>{{ticket.titre}}</td>
+								<td>{{ticket.description}}</td>
+								<td>{{ticket.files}}</td>
+								<td>{{ticket.createddate|date}}</td>
+								<td>{{ticket.updateddate|date}}</td>
+								<td>{{ticket.priority}}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

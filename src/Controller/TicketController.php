@@ -36,13 +36,14 @@ class TicketController extends AbstractController
             $this->em->persist($ticket);
             $this->em->flush();
 
-            return $this->redirectToRoute('app_ticket');
+            return $this->redirectToRoute('myticket');
         }
 
         return $this->renderForm('/ticket/ticketindex.html.twig', [
             'form' => $form,
         ]);
     }
+
     public function index(): Response
     {
         return $this->render('ticket/ticketindex.html.twig', [
