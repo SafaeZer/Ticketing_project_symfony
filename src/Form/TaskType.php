@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
@@ -50,6 +51,7 @@ class TaskType extends AbstractType
                 ],
 
             ])
+
             ->add('send', SubmitType::class);
     }
     public function configureOptions(OptionsResolver $resolver): void

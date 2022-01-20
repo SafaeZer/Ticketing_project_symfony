@@ -45,9 +45,9 @@ class TicketController extends AbstractController
         ]);
     }
     /**
-     * @Route("/myticket", name="myticket")
+     * @Route("/ticket/ticketsTab", name="myticket")
      */
-    public function index(TicketRepository $ticketRepository): Response
+    public function ticketsTab(TicketRepository $ticketRepository): Response
     {
         return $this->render('myticket/mytickets.html.twig', [
             'tickets' => $ticketRepository->findAll()
@@ -55,7 +55,7 @@ class TicketController extends AbstractController
     }
 
     /**
-     * @Route("/myticket/{id}", name="ticket_show")
+     * @Route("/ticket/{id}", name="ticket_show")
      */
     public function showticket(int $id, TicketRepository $ticketRepository)
     {
