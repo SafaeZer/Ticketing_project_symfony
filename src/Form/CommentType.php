@@ -17,7 +17,7 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('nickname', TextType::class, [
-                'label' => 'Your Name',
+                'label' => 'Full Name',
                 'attr' => [
                     'class' => 'form-control'
                 ]
