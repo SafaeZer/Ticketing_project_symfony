@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MyticketController!
-{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
 	<div class="row my-5">
@@ -33,6 +32,10 @@
 								<td>{{ticket.createddate|date}}</td>
 								<td>{{ticket.updateddate|date}}</td>
 								<td>{{ticket.priority}}</td>
+								<td>
+									<a class="btn btn-warning" href="{{ path('update', {id : ticket.id}) }}">Update</a>
+									<a class="btn btn-danger" href="#">Delete</a>
+								</td>
 							</tr>
 						{% endfor %}
 					</tbody>

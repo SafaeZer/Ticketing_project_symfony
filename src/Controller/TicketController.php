@@ -64,4 +64,25 @@ class TicketController extends AbstractController
             "ticket" => $ticket,
         ]);
     }
+    /**
+     * @Route("/ticket/update/{id}", name="update")
+     */
+    public function updateTicket(Ticket $ticket, Request $request)
+    {
+        $form = $this->createForm(TaskType::class, $ticket);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $ticket = $form->getData();
+            $this->em->persist($ticket);
+            $this->em->flush();
+
+            return $this->redirectToRoute('myticket');
+        }
+
+        return $this->renderForm('/myticket/update.html.twig', [
+            'form' => $form,
+        ]);
+    }
 }

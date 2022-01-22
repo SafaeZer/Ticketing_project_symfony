@@ -16,6 +16,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints\File;
+
 
 
 class TaskType extends AbstractType
@@ -38,7 +40,22 @@ class TaskType extends AbstractType
             ])
             ->add('titre', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('files', FileType::class)
+            ->add('files', FileType::class, [
+                'label' => 'Upload File (PDF, Word, Image)',
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/msword',
+                            'image/png',
+                            'image/jpg',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid document (PDF, word, img',
+                    ])
+                ],
+            ])
 
             ->add('priority', ChoiceType::class, [
                 'placeholder' => '-- select an option --',
