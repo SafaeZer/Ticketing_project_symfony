@@ -6,6 +6,7 @@ use App\Entity\Ticket;
 use App\Form\TaskType;
 use App\Repository\TicketRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -67,14 +68,13 @@ class TicketController extends AbstractController
     /**
      * @Route("/ticket/update/{id}", name="update")
      */
-    public function updateTicket(Ticket $ticket, Request $request)
+    public function updateTicket(Request $request, Ticket $ticket)
     {
+
         $form = $this->createForm(TaskType::class, $ticket);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $ticket = $form->getData();
             $this->em->persist($ticket);
             $this->em->flush();
 
@@ -84,5 +84,15 @@ class TicketController extends AbstractController
         return $this->renderForm('/myticket/update.html.twig', [
             'form' => $form,
         ]);
+    }
+    /**
+     * @Route("/ticket/delete/{id}", name="delete")
+     */
+    public function deleteTicket(Ticket $ticket)
+    {
+        $this->em->remove($ticket);
+        $this->em->flush();
+
+        return $this->redirectToRoute('myticket');
     }
 }
