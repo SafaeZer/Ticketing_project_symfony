@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ticket;
+use App\Entity\TicketType;
 use App\Form\TaskType;
 use App\Repository\TicketRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,6 +38,10 @@ class TicketController extends AbstractController
             $ticket = $form->getData();
             $this->em->persist($ticket);
             $this->em->flush();
+            $this->addFlash(
+                'notice',
+                'Your ticket added successfully!'
+            );
 
             return $this->redirectToRoute('myticket');
         }
@@ -70,11 +75,11 @@ class TicketController extends AbstractController
      */
     public function updateTicket(Request $request, Ticket $ticket)
     {
-
         $form = $this->createForm(TaskType::class, $ticket);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->em->persist($ticket);
             $this->em->flush();
 
@@ -83,6 +88,7 @@ class TicketController extends AbstractController
 
         return $this->renderForm('/myticket/update.html.twig', [
             'form' => $form,
+
         ]);
     }
     /**

@@ -31,7 +31,7 @@ class Ticket
     private $description;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="string")
      */
     private $files;
 
@@ -114,7 +114,7 @@ class Ticket
         return $this->files;
     }
 
-    public function setFiles($files): self
+    public function setFiles($files)
     {
         $this->files = $files;
 

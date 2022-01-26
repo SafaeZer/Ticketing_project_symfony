@@ -42,6 +42,7 @@ class TaskType extends AbstractType
             ->add('description', TextareaType::class)
             ->add('files', FileType::class, [
                 'label' => 'Upload File (PDF, Word, Image)',
+                'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
