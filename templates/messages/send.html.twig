@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messenger
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="col-6 mx-auto">
+			<div class="row">
+				<div class="col">
+					<h1>Send a message</h1>
+					{{ form(form) }}
+					</div>
+				</div>
+			</section>
+		{% endblock %}

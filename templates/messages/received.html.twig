@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messenger
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="col-6 mx-auto">
+			<div class="row">
+				<div class="col-12">
+					<h1>Messenger</h1>
+					<h2>Mailbox</h2>
+					<p>You received
+						{{ app.user.received|length }}
+						messages</p>
+				</div>
+				<div class="col-3">from</div>
+				<div class="col-3">Subject</div>
+				<div class="col-3">Date</div>
+				<div class="col-3">Actions</div>
+				{% for message in app.user.received %}
+					{% set bold = "" %}
+					{% if message.isRead == 0 %}
+						{% set bold = "fw-bold" %}
+					{% endif %}
+					<div class="col-3 {{bold}}">{{ message.sender.email }}</div>
+					<div class="col-3 {{bold}}">
+						<a href="{{ path("read", {id: message.id}) }}">{{ message.title }}</a>
+					</div>
+					<div class="col-3 {{bold}}">{{ message.createdAt|date }}</div>
+					<div class="col-3"></div>
+
+				{% endfor %}
+			</div>
+			<a href="{{path("send")}}" class="btn btn-primary">Send a Message</a>
+		</div>
+	</section>
+{% endblock %}

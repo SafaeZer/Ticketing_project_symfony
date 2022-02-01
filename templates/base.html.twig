@@ -49,9 +49,9 @@
 													</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link text-white" href="{{path('comment')}}">
+													<a class="nav-link text-white" href="{{path('messages')}}">
 														<span data-feather="shopping-cart"></span>
-														Comments
+														Messages
 													</a>
 												</li>
 												<li class="nav-item">
@@ -126,6 +126,12 @@
 									{% else %}
 										<h3 class="float-md-start mb-0">Ticketing</h3>
 									{% endif %}
+									{% for message in app.flashes("message") %}
+										<div class="alert alert-success alert-dismissible fade show" role="alert">
+											{{message}}
+											<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+										</div>
+									{% endfor %}
 									<nav class="nav nav-masthead justify-content-center float-md-end">
 										<div class="text-end">
 											{% if is_granted('IS_AUTHENTICATED_FULLY') %}
