@@ -7,13 +7,16 @@
 	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
 		{% else %}
-			<main class="px-3">
-				<h1>Ticketing system</h1>
-				<p class="lead">Sign In to enter into your space, if you're not a member yet please sign up.</p>
-				<p class="lead">
-					<a href="{{ path('app_login')}}" class="btn btn-lg btn-secondary fw-bold border-white bg-blue">Sign-in</a>
-				</p>
-			</main>
+			<body class="text-center text-white bg-dark">
+				<main class="px-3">
+					<h1>Ticketing system</h1>
+					<p class="lead">Sign In to enter into your space, if you're not a member yet please sign up.</p>
+					<p class="lead">
+						<a class="btn btn-outline-primary me-2" href="{{ path('app_login')}}">Sign-in</a>
+						<a class="btn btn-warning" href="{{ path('app_register')}}">Sign-up</a>
+					</p>
+				</main>
+			</body>
 	{% endif %}
 
 {% endblock %}

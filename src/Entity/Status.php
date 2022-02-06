@@ -22,7 +22,7 @@ class Status
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $name = "New";
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,6 +33,8 @@ class Status
      * @ORM\OneToMany(targetEntity=Ticket::class, mappedBy="status")
      */
     private $tickets;
+
+
 
     public function __construct()
     {

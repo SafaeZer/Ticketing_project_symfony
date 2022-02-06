@@ -69,4 +69,15 @@ class MessagesController extends AbstractController
 
         return $this->render('messages/read.html.twig', compact("message"));
     }
+    /**
+     * @Route("/delete/{id}", name="deletemessage")
+     */
+    public function delete(Messages $message): Response
+    {
+
+        $this->em->remove($message);
+        $this->em->flush();
+
+        return $this->redirectToRoute("received");
+    }
 }

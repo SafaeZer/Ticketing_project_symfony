@@ -39,10 +39,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Role;
 
     /**
      * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="sender")

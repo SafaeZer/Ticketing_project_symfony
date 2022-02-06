@@ -6,15 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SupportHomeController extends AbstractController
+/**
+ * @Route("support_space")
+ */
+class SupportController extends AbstractController
 {
     /**
-     * @Route("/support/home", name="support_home")
+     * @Route("/support", name="support")
      */
     public function index(): Response
     {
-        return $this->render('support_home/index.html.twig', [
-            'controller_name' => 'SupportHomeController',
-        ]);
+        $this->denyAccessUnlessGranted('ROLE_SUPPORT');
+
+        return $this->render('support/support.html.twig');
     }
 }

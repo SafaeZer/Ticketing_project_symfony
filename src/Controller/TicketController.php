@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Status;
 use App\Entity\Ticket;
 use App\Entity\TicketType;
 use App\Form\TaskType;
@@ -28,7 +29,6 @@ class TicketController extends AbstractController
     public function createTicket(Request $request)
     {
         $ticket = new Ticket();
-        // ...
 
         $form = $this->createForm(TaskType::class, $ticket);
         $form->handleRequest($request);

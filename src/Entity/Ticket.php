@@ -64,11 +64,14 @@ class Ticket
      */
     private $category;
 
+
     /**
      * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
+
+
 
 
 
