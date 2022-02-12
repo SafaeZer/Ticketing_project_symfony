@@ -29,6 +29,7 @@ class TicketController extends AbstractController
     public function createTicket(Request $request)
     {
         $ticket = new Ticket();
+        $status = $this->em->find('App\Entity\Status', 1);
 
         $form = $this->createForm(TaskType::class, $ticket);
         $form->handleRequest($request);
@@ -36,6 +37,8 @@ class TicketController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $ticket = $form->getData();
+            $ticket->setStatus($status);
+
             $this->em->persist($ticket);
             $this->em->flush();
             $this->addFlash(
@@ -55,6 +58,7 @@ class TicketController extends AbstractController
      */
     public function ticketsTab(TicketRepository $ticketRepository): Response
     {
+        // dd((string)$ticketRepository->findAll()[0]);
         return $this->render('myticket/mytickets.html.twig', [
             'tickets' => $ticketRepository->findAll()
         ]);

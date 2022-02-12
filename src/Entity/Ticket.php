@@ -31,7 +31,7 @@ class Ticket
     private $description;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $files;
 
@@ -70,6 +70,11 @@ class Ticket
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $state;
 
 
 
@@ -176,5 +181,21 @@ class Ticket
         $this->status = $status;
 
         return $this;
+    }
+
+    public function getState(): ?bool
+    {
+        return $this->state;
+    }
+
+    public function setState(?bool $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return (string) $this;
     }
 }
