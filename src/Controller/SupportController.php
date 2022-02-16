@@ -5,13 +5,15 @@ namespace App\Controller;
 use App\Entity\Status;
 use App\Entity\Ticket;
 use App\Form\ProgressType;
+use Doctrine\ORM\Mapping\Id;
 use App\Form\ValidTicketType;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TicketRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("support_space")
@@ -36,23 +38,23 @@ class SupportController extends AbstractController
         ]);
     }
     /**
-     * @Route("/support/progress/{id}", name="progress")
+     * @Route("/support-progress/{ticket}", name="support_progress", methods={"GET","POST"}, requirements={"ticket"="\d+"})
      */
-    public function progress(Request $request, Status $status): Response
+    public function progress(Request $request, Ticket $ticket): Response
     {
         $this->denyAccessUnlessGranted('ROLE_SUPPORT');
+        $status = $ticket->getStatus();
 
         $form = $this->createForm(ProgressType::class, $status);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($status);
             $this->em->flush();
 
             return $this->redirectToRoute('support');
         }
 
         return $this->render('support/progress.html.twig', [
-            'status' => $status,
             'form' => $form->createView(),
         ]);
     }
@@ -68,7 +70,7 @@ class SupportController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $this->em->flush();
 
             return $this->redirectToRoute('support');
         }

@@ -13,9 +13,12 @@ class ProgressType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
         $builder
+
             ->add('status', EntityType::class, [
                 'class' => Status::class,
+                'mapped' => false,
                 'placeholder' => '-- select an option --',
                 'choice_label'  => fn (Status $status) => $status->getName(),
 

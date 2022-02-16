@@ -22,7 +22,7 @@ class Status
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name = "New";
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)

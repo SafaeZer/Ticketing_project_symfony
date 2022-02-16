@@ -1,9 +1,10 @@
-{% extends 'support.html.twig' %}
+{% extends '/support/support.html.twig' %}
 
 {% block body %}
 
 {{ form_start(form) }}
-<div class="jumbotron">
-	{{ form_widget(form) }}
-	<button class="btn btn-success">{{ button_label|default('save') }}</button>
-</div{{form_end(form)}} {% endblock %}
+<div class="container mt-5">
+	<div class="col-6 mx-auto">
+		{{ form_widget(form) }}
+		<button class="btn btn-success">{{ button_label|default('save') }}</button>
+	</div{{form_end(form)}} {% endblock %}
