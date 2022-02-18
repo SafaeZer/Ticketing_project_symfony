@@ -76,6 +76,16 @@ class Ticket
      */
     private $state;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tickets")
+     */
+    private $responsible;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tickets")
+     */
+    private $author;
+
 
 
 
@@ -197,5 +207,29 @@ class Ticket
     public function __toString()
     {
         return (string) $this;
+    }
+
+    public function getResponsible(): ?User
+    {
+        return $this->responsible;
+    }
+
+    public function setResponsible(?User $responsible): self
+    {
+        $this->responsible = $responsible;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
     }
 }

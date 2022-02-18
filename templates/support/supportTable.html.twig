@@ -26,6 +26,7 @@
 										<th scope="col">Type</th>
 										<th scope="col">Category</th>
 										<th scope="col">Title</th>
+										<th scope="col">Responsible</th>
 										<th scope="col">Description</th>
 										<th scope="col">Files</th>
 										<th scope="col">Created_date</th>
@@ -45,6 +46,13 @@
 											<td>{{ticket.ticketType.name}}</td>
 											<td>{{ticket.category.name}}</td>
 											<td>{{ ticket.titre }}</td>
+											{% if ticket.responsible is null %}
+												<td>
+													<span class="badge bg-warning">Not assigned</span>
+												</td>
+											{% else %}
+												<td>{{ ticket.responsible }}</td>
+											{% endif %}
 											<td>{{ ticket.description }}</td>
 											<td>{{ ticket.files }}</td>
 											<td>{{ ticket.createddate|date }}</td>
@@ -54,13 +62,10 @@
 												<span class="badge bg-{{colorState}}">{{ ticket.state ? 'Valid' : 'Follow' }}</span>
 											</td>
 											<td>
-												<div class="row">
-													<div class="col-md-3">
-														<a href="{{ path('support_progress', {'ticket': ticket.id}) }}" class="btn btn-success text-light">Mark</a>
-														<a href="{{ path('valid_ticket', {'id': ticket.id}) }}" class="btn btn-success text-light">Validate</a>
-													</div>
+												<a href="{{ path('support_assign', {'id': ticket.id}) }}" class="btn btn-primary text-light">Assign</a>
+												<a href="{{ path('support_progress', {'ticket': ticket.id}) }}" class="btn btn-info text-light">Mark</a>
+												<a href="{{ path('valid_ticket', {'id': ticket.id}) }}" class="btn btn-success text-light">Validate</a>
 
-												</div>
 											</td>
 										</tr>
 

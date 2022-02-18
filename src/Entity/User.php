@@ -50,10 +50,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $received;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Ticket::class, mappedBy="responsible")
+     */
+    private $tickets;
+
     public function __construct()
     {
         $this->sent = new ArrayCollection();
         $this->received = new ArrayCollection();
+        $this->tickets = new ArrayCollection();
     }
 
 
@@ -216,5 +222,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Ticket[]
+     */
+    public function getTickets(): Collection
+    {
+        return $this->tickets;
+    }
+
+    public function addTicket(Ticket $ticket): self
+    {
+        if (!$this->tickets->contains($ticket)) {
+            $this->tickets[] = $ticket;
+            $ticket->setResponsible($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTicket(Ticket $ticket): self
+    {
+        if ($this->tickets->removeElement($ticket)) {
+            // set the owning side to null (unless already changed)
+            if ($ticket->getResponsible() === $this) {
+                $ticket->setResponsible(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return (string) $this->email;
     }
 }
