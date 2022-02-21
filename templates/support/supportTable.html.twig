@@ -62,9 +62,9 @@
 												<span class="badge bg-{{colorState}}">{{ ticket.state ? 'Valid' : 'Follow' }}</span>
 											</td>
 											<td>
-												<a href="{{ path('support_assign', {'id': ticket.id}) }}" class="btn btn-primary text-light">Assign</a>
-												<a href="{{ path('support_progress', {'ticket': ticket.id}) }}" class="btn btn-info text-light">Mark</a>
-												<a href="{{ path('valid_ticket', {'id': ticket.id}) }}" class="btn btn-success text-light">Validate</a>
+												<a href="{{ path('support_assign', {'id': ticket.id}) }}" class="btn btn-sm btn-primary text-light">Assign</a>
+												<a href="{{ path('support_progress', {'ticket': ticket.id}) }}" class="btn btn-sm btn-info text-light">Mark</a>
+												<a href="{{ path('valid_ticket', {'id': ticket.id}) }}" class="btn btn-sm btn-success text-light">Validate</a>
 
 											</td>
 										</tr>

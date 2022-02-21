@@ -13,7 +13,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -56,18 +55,11 @@ class SupportController extends AbstractController
     public function progress(Request $request, Ticket $ticket): Response
     {
         $this->denyAccessUnlessGranted('ROLE_SUPPORT');
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
 
-        //$status = $ticket->getStatus();
-        $status = new Status();
-        var_dump($propertyAccessor->getValue($status, 'name'));
-        $form = $this->createForm(ProgressType::class, $status);
+        $form = $this->createForm(ProgressType::class, $ticket);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $status = $form->getData();
-            $ticket->setStatus($status);
-            dd($status);
             $this->em->flush();
 
             return $this->redirectToRoute('support_tab');

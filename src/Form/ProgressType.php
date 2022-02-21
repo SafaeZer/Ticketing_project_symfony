@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Status;
+use App\Entity\Ticket;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -18,7 +19,6 @@ class ProgressType extends AbstractType
 
             ->add('status', EntityType::class, [
                 'class' => Status::class,
-                'mapped' => false,
                 'placeholder' => '-- select an option --',
                 'choice_label'  => fn (Status $status) => $status->getName(),
 
@@ -28,7 +28,7 @@ class ProgressType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Status::class,
+            'data_class' => Ticket::class,
         ]);
     }
 }
