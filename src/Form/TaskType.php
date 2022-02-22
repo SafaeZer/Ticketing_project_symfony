@@ -61,9 +61,9 @@ class TaskType extends AbstractType
             ->add('priority', ChoiceType::class, [
                 'placeholder' => '-- select an option --',
                 'choices'  => [
-                    'Medium' => 'medium',
-                    'Urgent' => 'urgent',
                     'Very urgent' => 'very urgent',
+                    'Urgent' => 'urgent',
+                    'Medium' => 'medium',
                     'Low' => 'low',
                     'Blocking' => 'blocking'
                 ],

@@ -2,24 +2,52 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use App\Entity\Ticket;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Faker\Factory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    public $faker;
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordHasherInterface $passwordEncoder)
+    {
+        // $this->faker = Factory::create();
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     public function load(ObjectManager $manager): void
     {
-        // create 10 tickets! Bam!
-        for ($i = 0; $i < 10; $i++) {
-            $ticket = new Ticket();
-            $ticket->setTitre('ticket ' . $i);
-            $ticket->setDescription();
-            $ticket->setDescription();
-            $ticket->setPriority();
-            $ticket->setDescription();
-            $manager->persist($ticket);
+        // $product = new Product();
+        // $manager->persist($product);
+        $this->loadUser($manager);
+        $manager->flush();
+    }
+    public function loadUser(ObjectManager $manager)
+    {
+
+        for ($i = 0; $i < 50; $i++) {
+
+            $myUser = new User();
+            $myUser->setEmail($this->faker->email);
+
+            $roles = ['ROLE_COLLABORATOR', 'ROLE_SUPPORT'];
+
+            $myUser->setRoles([$roles[rand(0, 2)]]);
+            //$myUser->setPassword($this->passwordEncoder->encodePassword(
+            //$myUser,
+            //'secret'
+            // ));
+
+            $manager->persist($myUser);
+
+            $this->addReference("user_$i", $myUser);
         }
+
 
         $manager->flush();
     }

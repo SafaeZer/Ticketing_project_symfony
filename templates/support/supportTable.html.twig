@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'support.html.twig' %}
 
 {% block title %}{% endblock %}
 
@@ -41,8 +41,14 @@
 
 										<tr>
 											{% set colorState = ticket.state == 0 ? 'danger' : 'success' %}
+											{% set colorStatus = ticket.status == "New" ? 'success' : 'danger' %}
+											{% set colorPriority = ticket.priority  ==  "very urgent" ? 'danger' : ticket.priority  ==  "urgent" ? 'warning' :   
+                                                                                ticket.priority  ==  "primary" ? '#ff6600' :  "success" 
+                                    %}
 											<td scope="row">{{ ticket.id }}</td>
-											<td>{{ ticket.status }}</td>
+											<td>
+												<span class="badge bg-{{colorStatus}}">{{ ticket.status }}</span>
+											</td>
 											<td>{{ticket.ticketType.name}}</td>
 											<td>{{ticket.category.name}}</td>
 											<td>{{ ticket.titre }}</td>
@@ -57,7 +63,9 @@
 											<td>{{ ticket.files }}</td>
 											<td>{{ ticket.createddate|date }}</td>
 											<td>{{ ticket.updateddate|date }}</td>
-											<td>{{ ticket.priority }}</td>
+											<td>
+												<span class="badge bg-{{colorPriority}}">{{ ticket.priority }}</span>
+											</td>
 											<td>
 												<span class="badge bg-{{colorState}}">{{ ticket.state ? 'Valid' : 'Follow' }}</span>
 											</td>

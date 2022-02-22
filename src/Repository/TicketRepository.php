@@ -25,8 +25,7 @@ class TicketRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('t')
             ->andWhere('t.responsible = :val')
             ->setParameter('val', $value)
-            ->andWhere('t.state = :val2')
-            ->setParameter('val2', 1)
+
             ->orderBy('t.id', 'ASC')
             // ->setMaxResults(10)
             ->getQuery()

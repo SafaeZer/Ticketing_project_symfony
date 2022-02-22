@@ -36,7 +36,7 @@ class SupportController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_SUPPORT');
 
-        return $this->render('support/support.html.twig');
+        return $this->render('support.html.twig');
     }
     /**
      * @Route("/support-tab", name="support_tab")
@@ -46,7 +46,7 @@ class SupportController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_SUPPORT');
 
         return $this->render('support/supportTable.html.twig', [
-            'tickets' => $ticketRepository->findAll(),
+            'tickets' => $ticketRepository->findBy([], ['priority' => 'DESC']),
         ]);
     }
     /**
