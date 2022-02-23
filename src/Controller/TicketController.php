@@ -49,7 +49,7 @@ class TicketController extends AbstractController
             return $this->redirectToRoute('myticket');
         }
 
-        return $this->renderForm('/ticket/ticketindex.html.twig', [
+        return $this->renderForm('/myticket/ticketindex.html.twig', [
             'form' => $form,
         ]);
     }

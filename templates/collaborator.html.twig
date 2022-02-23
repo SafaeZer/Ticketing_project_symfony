@@ -25,7 +25,7 @@
 										<div class="sidebar-sticky">
 											<ul class="nav flex-column">
 												<li class="nav-item">
-													<a class="nav-link active" aria-current="page" href="{{path('app_homepage')}}">
+													<a class="nav-link active" aria-current="page" href="{{path('collaborator')}}">
 														<span data-feather="home"></span>
 														Dashboard
 													</a>
@@ -120,6 +120,8 @@
 											<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 										</div>
 									{% endfor %}
+									{% block content %}{% endblock %}
+
 									<nav class="nav nav-masthead justify-content-center float-md-end">
 										<div class="text-end">
 											{% if is_granted('IS_AUTHENTICATED_FULLY') %}

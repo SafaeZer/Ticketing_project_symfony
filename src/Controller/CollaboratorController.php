@@ -18,6 +18,6 @@ class CollaboratorController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_COLLABORATOR');
 
-        return $this->render('collaborator/collaborator.html.twig');
+        return $this->render('collaborator.html.twig');
     }
 }
