@@ -31,6 +31,15 @@ class TicketRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function findByPriority()
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.responsible = null')
+            ->orderBy('t.priority', 'DESC')
+            // ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Ticket[] Returns an array of Ticket objects
     //  */

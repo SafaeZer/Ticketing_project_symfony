@@ -64,26 +64,30 @@
 										<span class="badge bg-{{colorState}}">{{ ticket.state ? 'Valid' : 'Follow' }}</span>
 									</td>
 									<td>
-										<a href="{{ path('support_assign', {'id': ticket.id}) }}" class="btn btn-sm btn-primary text-light">Assign</a>
-										<a href="{{ path('support_progress', {'ticket': ticket.id}) }}" class="btn btn-sm btn-info text-light">Mark</a>
-										<a href="{{ path('valid_ticket', {'id': ticket.id}) }}" class="btn btn-sm btn-success text-light">Validate</a>
+										{% if ticket.responsible is null %}
+											<a href="{{ path('support_assign', {'id': ticket.id}) }}" class="btn btn-sm btn-primary text-light">Assign</a>
 
+											<a href="{{ path('valid_ticket', {'id': ticket.id}) }}" class="btn btn-sm btn-success text-light">Validate</a>
+										{% else %}
+											<button type="button" class="btn-sm" disabled>Assigned</button>
+											<a href="{{ path('support_progress', {'ticket': ticket.id}) }}" class="btn btn-sm btn-info text-light">Mark</a>
+
+										{% endif %}
 									</td>
 								</tr>
-
-							{% else %}
-								<tr>
-									<td colspan="7">No ticket
-									</td>
-								</tr>
-							{% endfor %}
+							</td>
 						</tbody>
-					</table>
+					</tr>
 
+				{% else %}
+					<tr>
+						<td colspan="7">No ticket
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-				</div>
-			</div>
-		</div>
 
 	</div>
-{% endblock %}
+</div></div></div>{% endblock %}

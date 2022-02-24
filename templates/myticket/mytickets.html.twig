@@ -33,13 +33,19 @@
 
 							{% for ticket in tickets %}
 								{#	{{dump(ticket)}}    #}
-
+								{% set colorState = ticket.state == 0 ? 'danger' : 'success' %}
+								{% set colorStatus = ticket.status == "New" ? 'success' : 'danger' %}
+								{% set colorPriority = ticket.priority  ==  "very urgent" ? 'danger' : ticket.priority  ==  "urgent" ? 'warning' :   
+                                                                                ticket.priority  ==  "primary" ? '#ff6600' :  "success" 
+                                    %}
 
 								<tr>
 
 									{% set colorState = ticket.state == 0 ? 'danger' : 'success' %}
 									<td scope="row">{{ticket.id}}</td>
-									<td>{{ticket.status}}</td>
+									<td>
+										<span class="badge bg-{{colorStatus}}">{{ticket.status}}</span>
+									</td>
 									<td>{{ticket.ticketType.name}}</td>
 									<td>{{ticket.category.name}}</td>
 									<td>{{ticket.titre}}</td>

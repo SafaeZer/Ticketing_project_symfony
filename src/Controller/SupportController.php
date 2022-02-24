@@ -37,7 +37,7 @@ class SupportController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_SUPPORT');
 
         return $this->render('support/supportTable.html.twig', [
-            'tickets' => $ticketRepository->findBy([], ['priority' => 'DESC']),
+            'tickets' => $ticketRepository->findBy(array('responsible' => null), array('priority' => 'DESC')),
         ]);
     }
     /**
